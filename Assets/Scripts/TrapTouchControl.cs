@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapTouchControl : MonoBehaviour
 {
     public GameObject explosiveAnim;
-    private bool isTriggered = false;
+    public bool isTriggered = false;
     private float delay = 1.0f;
     
     void Start()
@@ -18,7 +18,7 @@ public class TrapTouchControl : MonoBehaviour
     {
         if (isTriggered)
         {
-          
+
             delay -= Time.deltaTime;
             if (delay <= 0)
             {

@@ -6,9 +6,11 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
+
 public class TrapSpawner : MonoBehaviour
 {
-    public TrapTouchControl control;
+    
+    private bool checktrigger;
     float timer = 0;
     public GameObject trap;
     int index = 0;
@@ -22,19 +24,24 @@ public class TrapSpawner : MonoBehaviour
     
     void Start()
     {
-      
+        TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
+        checktrigger = TrapTouchControl.isTriggered;
+
         //Invoke("TrapsSpawner",1f);
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > 0.75f)
+        TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
+        checktrigger = TrapTouchControl.isTriggered;
+        if (timer > 0.75f && checktrigger == false)
         {
             TrapsSpawner();
             timer = 0;
             index++; 
         }
+      
     }
     
     void TrapsSpawner() {
