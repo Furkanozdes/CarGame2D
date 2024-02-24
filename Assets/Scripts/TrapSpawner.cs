@@ -9,6 +9,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 
 public class TrapSpawner : MonoBehaviour
 {
+    public GameObject difficultyPanel;
     private int difficulty = 0;
     private bool checktrigger;
     float timer = 0;
@@ -16,13 +17,14 @@ public class TrapSpawner : MonoBehaviour
     int index = 0;
     GameObject go;
     public GameObject spawnTraps;
+    public bool timercheck = false;
+
     int[] TrapsDifficult = new int[]
         { 1, 3, 2, 3, 1, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 3, 2, 1, 2, 3, 1, 2, 3, 3, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 
           2, 1, 2, 3, 1, 3, 3, 1, 3, 1, 2, 3, 3, 3, 1, 2, 1, 3, 2, 1, 2, 3, 2, 1, 3, 1, 2, 2, 3, 1, 1, 2, 3, 3, 1, 3, 3, 2, 
           1, 1, 3, 2, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 2, 1, 2, 2, 1, 3, 2, 1, 1, 3, 1, 2, 3, 3, 2, 1, 3, 1, 3, 1};
     int[] TrapsEasy = new int[]
-        {2, 1, 3, 2, 1, 3, 3, 1, 2, 1, 2, 3, 1, 2, 1, 2, 3, 2, 1, 2, 3, 1, 2, 3, 3, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3,
-         2, 1, 2, 3, 1};
+        {2, 1, 2, 3, 1, 3, 3, 1, 3, 1, 2, 3, 3, 3, 1, 2, 1, 3, 2, 1, 2, 3, 2, 1, 3, 1, 2, 2, 3, 1, 1, 2, 3, 3, 1, 3, 3, 2,1,1};
     int[] TrapsMedium = new int[]
         {2, 1, 3, 2, 1, 3, 3, 1, 2, 1, 2, 3, 1, 2, 1, 2, 3, 2, 1, 2, 3, 1, 2, 3, 3, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3,
          2, 1, 2, 3, 1, 3, 3, 1, 3, 1, 2, 3, 3, 3, 1, 2, 1, 3, 2, 1, 2, 3, 2, 1};
@@ -33,10 +35,7 @@ public class TrapSpawner : MonoBehaviour
     {
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
-        PanelsControl DifficultyPanelControl = FindObjectOfType<PanelsControl>();
-        difficulty = DifficultyPanelControl.checkdifficulty;
-        
-       
+        difficultyPanel.SetActive(true);
         //Invoke("TrapsSpawner",1f);
     }
 
@@ -45,29 +44,53 @@ public class TrapSpawner : MonoBehaviour
         timer += Time.deltaTime;
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
-         PanelsControl DifficultyPanelControl = FindObjectOfType<PanelsControl>();
-        difficulty = DifficultyPanelControl.checkdifficulty;
-        if (timer > 0.75f && checktrigger == false && difficulty == 3)
+        if (difficulty == 3)
         {
-            TrapsSpawner();
-            timer = 0;
-            index++; 
+            if (timer > 0.75f && checktrigger == false)
+            {
+                TrapsSpawner();
+                timer = 0;
+                index++;
+            }
         }
-        else if (timer > 0.75f && checktrigger == false && difficulty == 2)
+        else if (difficulty == 2)
         {
-            TrapsSpawnerMiddle();
-            timer = 0;
-            index++;
+            if (timer > 0.75f && checktrigger == false)
+            {
+                TrapsSpawnerMiddle();
+                timer = 0;
+                index++;
+            }
         }
-        else if (timer > 0.75f && checktrigger == false && difficulty == 1)
+        else if (difficulty == 1)
         {
-            TrapsSpawnerEasy();
-            timer = 0;
-            index++;
+            if (timer > 0.75f && checktrigger == false)
+            {
+                TrapsSpawnerEasy();
+                timer = 0;
+                index++;
+            }
         }
 
     }
-    
+    public void EasyCheck()
+    {
+        difficulty = 1;
+        difficultyPanel.SetActive (false);
+        timercheck = true;
+    }
+    public void MiddleCheck()
+    {
+        difficulty = 2;
+        difficultyPanel.SetActive(false);
+        timercheck = true;
+    }
+    public void DifficultCheck()
+    {
+        difficulty = 3;
+        difficultyPanel.SetActive(false);
+        timercheck = true;
+    }
     void TrapsSpawner() {
             if(index<100){
 
@@ -90,45 +113,45 @@ public class TrapSpawner : MonoBehaviour
     }
     void TrapsSpawnerMiddle()
     {
-        if (index < 61)
+        if (index < 65)
         {
 
-            if (TrapsDifficult[index] == 1) // left
+            if (TrapsMedium[index] == 1) // left
             {
                 go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsMedium, 0, 1);
             }
-            else if (TrapsDifficult[index] == 2) // middle
+            else if (TrapsMedium[index] == 2) // middle
             {
                 go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsMedium, 0, 1);
             }
-            else if (TrapsDifficult[index] == 3) //right
+            else if (TrapsMedium[index] == 3) //right
             {
                 go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsMedium, 0, 1);
             }
         }
     }
     void TrapsSpawnerEasy()
     {
-        if (index < 41)
+        if (index < 45)
         {
 
-            if (TrapsDifficult[index] == 1) // left
+            if (TrapsEasy[index] == 1) // left
             {
                 go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsEasy, 0, 1);
             }
-            else if (TrapsDifficult[index] == 2) // middle
+            else if (TrapsEasy[index] == 2) // middle
             {
                 go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsEasy, 0, 1);
             }
-            else if (TrapsDifficult[index] == 3) //right
+            else if (TrapsEasy[index] == 3) //right
             {
                 go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
+                Array.Clear(TrapsEasy, 0, 1);
             }
         }
     }
