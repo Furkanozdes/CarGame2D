@@ -33,15 +33,10 @@ public class TrapSpawner : MonoBehaviour
     {
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
-        DifficultyPanelControl DifficultyPanelControl = FindObjectOfType<DifficultyPanelControl>();
-        if (DifficultyPanelControl != null)
-        {
-            difficulty = DifficultyPanelControl.difficulty;
-        }
-        else
-        {
-            Debug.Log(difficulty);
-        }
+        PanelsControl DifficultyPanelControl = FindObjectOfType<PanelsControl>();
+        difficulty = DifficultyPanelControl.checkdifficulty;
+        
+       
         //Invoke("TrapsSpawner",1f);
     }
 
@@ -50,15 +45,8 @@ public class TrapSpawner : MonoBehaviour
         timer += Time.deltaTime;
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
-        DifficultyPanelControl DifficultyPanelControl = FindObjectOfType<DifficultyPanelControl>();
-        if (DifficultyPanelControl != null)
-        {
-            difficulty = DifficultyPanelControl.difficulty;
-        }
-        else
-        {
-            Debug.Log(difficulty);
-        }
+         PanelsControl DifficultyPanelControl = FindObjectOfType<PanelsControl>();
+        difficulty = DifficultyPanelControl.checkdifficulty;
         if (timer > 0.75f && checktrigger == false && difficulty == 3)
         {
             TrapsSpawner();
