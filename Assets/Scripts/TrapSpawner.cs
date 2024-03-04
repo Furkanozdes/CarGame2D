@@ -71,25 +71,28 @@ public class TrapSpawner : MonoBehaviour
                 index++;
             }
         }
-
+        else
+        {
+            timercheck = false;
+        }
     }
     public void EasyCheck()
     {
         difficulty = 1;
         difficultyPanel.SetActive (false);
-        timercheck = true;
+        
     }
     public void MiddleCheck()
     {
         difficulty = 2;
         difficultyPanel.SetActive(false);
-        timercheck = true;
+        
     }
     public void DifficultCheck()
     {
         difficulty = 3;
         difficultyPanel.SetActive(false);
-        timercheck = true;
+        
     }
     void TrapsSpawner() {
             if(index<100){
@@ -98,16 +101,19 @@ public class TrapSpawner : MonoBehaviour
             {
                 go = Instantiate(trap, new Vector3(-4.5f,8,0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsDifficult, 0, 1);
+                timercheck = true;
             }
             else if (TrapsDifficult[index] == 2) // middle
             {
                 go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsDifficult, 0, 1);
+                timercheck = true;
             }
             else if (TrapsDifficult[index] == 3) //right
             {
                 go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsDifficult, 0, 1);
+                timercheck = true;
             }
         }
     }
@@ -120,16 +126,19 @@ public class TrapSpawner : MonoBehaviour
             {
                 go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsMedium, 0, 1);
+                timercheck = true;
             }
             else if (TrapsMedium[index] == 2) // middle
             {
                 go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsMedium, 0, 1);
+                timercheck = true;
             }
             else if (TrapsMedium[index] == 3) //right
             {
                 go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsMedium, 0, 1);
+                timercheck = true;
             }
         }
     }
@@ -142,16 +151,19 @@ public class TrapSpawner : MonoBehaviour
             {
                 go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsEasy, 0, 1);
+                timercheck = true;
             }
             else if (TrapsEasy[index] == 2) // middle
             {
                 go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsEasy, 0, 1);
+                timercheck = true;
             }
             else if (TrapsEasy[index] == 3) //right
             {
                 go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
                 Array.Clear(TrapsEasy, 0, 1);
+                timercheck = true;
             }
         }
     }
