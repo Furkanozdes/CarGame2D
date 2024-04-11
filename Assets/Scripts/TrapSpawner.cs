@@ -14,10 +14,13 @@ public class TrapSpawner : MonoBehaviour
     private bool checktrigger;
     float timer = 0;
     public GameObject trap;
+    public GameObject traptnt;
+    public GameObject trapfireball;
     int index = 0;
     GameObject go;
     public GameObject spawnTraps;
     public bool timercheck = false;
+    
 
     int[] TrapsDifficult = new int[]
         { 1, 3, 2, 3, 1, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 3, 2, 1, 2, 3, 1, 2, 3, 3, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 
@@ -36,11 +39,13 @@ public class TrapSpawner : MonoBehaviour
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
         difficultyPanel.SetActive(true);
+       
         //Invoke("TrapsSpawner",1f);
     }
 
     void Update()
     {
+        
         timer += Time.deltaTime;
         TrapTouchControl TrapTouchControl = FindObjectOfType<TrapTouchControl>();
         checktrigger = TrapTouchControl.isTriggered;
@@ -99,21 +104,67 @@ public class TrapSpawner : MonoBehaviour
 
             if (TrapsDifficult[index] == 1) // left
             {
-                go = Instantiate(trap, new Vector3(-4.5f,8,0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 3);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 1)
+                {
+                    go = Instantiate(traptnt, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                }
+                else if(randomtrap == 2)
+                {
+                    go = Instantiate(trapfireball, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                }
             }
             else if (TrapsDifficult[index] == 2) // middle
             {
-                go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 3);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 1)
+                {
+                    go = Instantiate(traptnt, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
+                else if(randomtrap == 2)
+                {
+                    go = Instantiate(trapfireball, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
             }
             else if (TrapsDifficult[index] == 3) //right
             {
-                go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsDifficult, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 3);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 1)
+                {
+                    go = Instantiate(traptnt, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 2)
+                {
+                    go = Instantiate(trapfireball, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsDifficult, 0, 1);
+                    timercheck = true;
+                }
             }
         }
     }
@@ -121,24 +172,54 @@ public class TrapSpawner : MonoBehaviour
     {
         if (index < 65)
         {
-
+           
+            
             if (TrapsMedium[index] == 1) // left
             {
-                go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsMedium, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 2);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 1)
+                {
+                    go = Instantiate(traptnt, new Vector3(-4.5f, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
             }
             else if (TrapsMedium[index] == 2) // middle
             {
-                go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsMedium, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 2);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
+                else if(randomtrap == 1)
+                {
+                    go = Instantiate(traptnt, new Vector3(0, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
             }
             else if (TrapsMedium[index] == 3) //right
             {
-                go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
-                Array.Clear(TrapsMedium, 0, 1);
-                timercheck = true;
+                int randomtrap = UnityEngine.Random.Range(0, 2);
+                if (randomtrap == 0)
+                {
+                    go = Instantiate(trap, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
+                else if (randomtrap == 1){
+                    go = Instantiate(traptnt, new Vector3(5, 8, 0), Quaternion.identity, spawnTraps.transform) as GameObject;
+                    Array.Clear(TrapsMedium, 0, 1);
+                    timercheck = true;
+                }
             }
         }
     }
